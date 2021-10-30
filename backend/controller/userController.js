@@ -27,6 +27,8 @@ const authUser = asyncHandler( async(req,res) => {
 
 
 const getUserProfile = asyncHandler( async(req,res) => {
+	console.log(`req.body.user :  ${req.body.user}`)
+
 	const user = await User.findById(req.user._id);
 
 	if(user) {
@@ -46,6 +48,7 @@ const getUserProfile = asyncHandler( async(req,res) => {
 
 
 const getUserById = asyncHandler(async(req,res) => {
+	console.log(`req.use :  ${req.params}`)
 	const user = await User.findById(req.params.id).select('-password')
 	
 	if(user){

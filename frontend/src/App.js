@@ -10,6 +10,8 @@ import AdminAddUsersScreen from './screens/AdminAddUsersScreen'
 import ClientScreen from './screens/ClientScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import UpdateProfileScreen from './screens/UpdateProfileScreen'
+import AddLocationScreen from './screens/AddLocationScreen'
+
 
 
 
@@ -27,6 +29,7 @@ function App() {
                     <Route path='/admin/addusers' component={AdminAddUsersScreen} />
                     <Route path='/admin/clientlist' component={ClientScreen} />  
                     <Route path='/admin/master' component={LocationScreen} />
+                    <Route path='/admin/addlocation' component={AddLocationScreen} />
                     <Route path='/updateprofile' component={UpdateProfileScreen} />  
 
 
