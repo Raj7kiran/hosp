@@ -17,13 +17,14 @@ const LoginScreen = ({ location, history }) => {
 	const userLogin = useSelector((state) => state.userLogin)
 	const { loading, error, userInfo } = userLogin
 
-	//const redirect = location.search? location.search.split('=')[1] : '/'
+	const redirect = location.search? location.search.split('=')[1] : '/'
 
 	useEffect(() => {
 		if(userInfo){
-			history.push('/login')
+			history.push('redirect')
 		}
-	},[history, userInfo])
+	},[history, userInfo, redirect])
+
 
 	const submitHandler = (e) => {
 		e.preventDefault()
@@ -34,12 +35,12 @@ const LoginScreen = ({ location, history }) => {
 	return (
 		<>
 			{error && <Message variant='danger'>{error}</Message>}
-			{loading && <Loader />}
+			{loading && <Loader />}	
 			{userInfo ? ('')
 			  : (
-					<FormContainer>	
+					<FormContainer>							
+					<h1>Login</h1>	
 						
-					<h1>Login</h1>			
 					<Form onSubmit={submitHandler} className='py-3'>
 						<Form.Group controlId='email'>
 							<Form.Label>Email Address</Form.Label>

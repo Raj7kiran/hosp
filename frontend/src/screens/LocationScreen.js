@@ -8,12 +8,14 @@ import { listLocations } from '../actions/adminActions'
 
 
 
-const LocationScreen = () => {
+const LocationScreen = ({ location }) => {
 	const dispatch = useDispatch()
 
 	const locationDetails = useSelector(state => state.locationDetails)
 	const { loading, error, locations } = locationDetails
 	
+	const redirect = location.search? location.search.split('=')[1] : '/'
+
 	useEffect(() => {
 		dispatch(listLocations())
 	},[dispatch])
@@ -22,7 +24,7 @@ const LocationScreen = () => {
 
 	return(
 		<>
-			<Link to='/' className='btn btn-dark'>Go Back</Link>
+			<Link to={redirect} className='btn btn-dark'>Go Back</Link>
 			<Row className='align-items-center'>
 			
 				<Col>

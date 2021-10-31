@@ -1,6 +1,7 @@
 import path from 'path'
 import express from 'express'
 import dotenv from 'dotenv'
+import morgan from 'morgan'
 import connectDB from './config/db.js'
 import Location from './models/locationModel.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
@@ -9,6 +10,10 @@ import adminRoutes from './routes/adminRoutes.js'
 
 
 const app = express();
+
+if(process.env.NODE_ENV === 'development'){
+	app.use(morgan('dev'))
+}
 
 app.use(express.json())
 
@@ -22,7 +27,7 @@ app.use('/admin', adminRoutes)
 
 
 const __dirname = path.resolve()
-//app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 
 if(process.env.NODE_ENV === 'production'){
@@ -42,5 +47,5 @@ app.use(notFound)
 app.use(errorHandler)
 
 
-
-app.listen(5000, console.log(`Backend server is running in 5000`));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode in port ${PORT}`));
