@@ -12,6 +12,7 @@ const AddLocation = ({history}) => {
 	const [ country, setCountry ] = useState('')
 	const [ city, setCity ] = useState('')
 	const [ stat, setStat ] = useState('')
+	const [ message, setMessage ] = useState(null)
 
 	const dispatch = useDispatch()
 
@@ -20,7 +21,7 @@ const AddLocation = ({history}) => {
 
 	useEffect(()=>{
 		if(success){
-			history.push('/admin/master')
+			history.push('/admin/locations')
 		} 
 	},[history, success])
 
@@ -30,7 +31,7 @@ const AddLocation = ({history}) => {
 		e.preventDefault()
 		dispatch(createLocation({
 			country,
-			stat,
+			state: stat,
 			city
 		}))
 	}
@@ -42,6 +43,9 @@ const AddLocation = ({history}) => {
 			<Link to='/admin/master' className='btn btn-dark my-3'>
 					Go Back
 			</Link>
+				{message && <Message variant='danger'>{message}</Message>}
+				{error && <Message variant='danger'>{error}</Message>}
+				
 				<Form onSubmit={submitHandler} >
 						<Form.Group controlId='country'>
 							<Form.Label>Country</Form.Label>

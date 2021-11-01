@@ -29,7 +29,7 @@ const authUser = asyncHandler( async(req,res) => {
 
 //get user profile
 const getUserProfile = asyncHandler( async(req,res) => {
-	console.log('success')
+	
 
 	const user = await User.findById(req.user._id);
 

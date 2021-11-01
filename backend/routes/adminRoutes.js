@@ -1,11 +1,13 @@
 import express from 'express'
 const router = express.Router()
-import { getClientList, getLocations, createLocation } from '../controller/adminController.js'
+import { getClientList, getLocations, createLocation, deleteLocation } from '../controller/adminController.js'
+import { protect, admin } from '../middleware/authMiddleware.js'
 
 
-router.route('/createlocation').post(createLocation)
-router.route('/clientlist').get(getClientList)
-router.route('/master').get(getLocations)
+router.route('/createlocation').post(protect, createLocation)
+router.route('/clientlist').get(protect, getClientList)
+router.route('/locations').get(protect, getLocations)
+router.route('/locations/:id').delete(protect, deleteLocation)
 
 
 export default router

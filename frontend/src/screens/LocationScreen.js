@@ -1,30 +1,49 @@
 import React, {  useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Table,  Row, Col } from 'react-bootstrap'
+import { Table,  Row, Col, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { listLocations } from '../actions/adminActions'
+import { listLocations, deleteLocation } from '../actions/adminActions'
+import { LOCATION_DELETE_RESET } from '../constants/adminConstants'
 
 
 
-const LocationScreen = ({ location }) => {
+const LocationScreen = ({ location, history }) => {
 	const dispatch = useDispatch()
 
-	const locationDetails = useSelector(state => state.locationDetails)
-	const { loading, error, locations } = locationDetails
+	const locationsList = useSelector(state => state.locationsList)
+	const { loading, error, locations } = locationsList
+
+	const locationCreate = useSelector(state => state.locationCreate)
+	const {  success: locationCreatesuccess } = locationCreate
+
+	const locationDelete = useSelector(state => state.locationDelete)
+	const { loading: loadingDelete, success: successDelete, error:errorDelete } = locationDelete
+
+	const userLogin = useSelector(state => state.userLogin)
+	const {userInfo} = userLogin
 	
 	const redirect = location.search? location.search.split('=')[1] : '/'
 
 	useEffect(() => {
+		
+		if(!userInfo || !userInfo.isAdmin){
+			history.push('/login')
+		}
+
 		dispatch(listLocations())
 	},[dispatch])
 
-	// const locations = []
+	const deleteHandler = (id) => {
+		if(window.confirm('Are you sureyou want to delete?')){
+			dispatch(deleteLocation(id))
+		}
+	}
 
 	return(
 		<>
-			<Link to={redirect} className='btn btn-dark'>Go Back</Link>
+			<Link to='/' className='btn btn-dark'>Go Back</Link>
 			<Row className='align-items-center'>
 			
 				<Col>
@@ -34,10 +53,14 @@ const LocationScreen = ({ location }) => {
 					<Link className='btn btn-dark' to='/admin/addlocation'>Add Location</Link>
 				</Col>
 			</Row>
+			{loadingDelete && <Loader />}
+			{errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+			{/*{successDelete && <Message variant='success'>Location Deleted</Message>}*/}
+			{locationCreatesuccess && <Message variant='success'>Location Added</Message>}
 			{ loading ? (<Loader />)
 			  : error ? (<Message variant='danger'>{error}</Message> )
 			  : (
-			  		<Table striped bordered hover responsive className='table-sm'>
+			  		<Table striped bordered hover responsive='md' className='table-sm'>
 						<thead>
 							<tr>
 								<th>Country</th>
@@ -51,6 +74,12 @@ const LocationScreen = ({ location }) => {
 										<td>{location.country}</td>
 										<td>{location.state}</td>
 										<td>{location.city}</td>
+										<td>
+											<Button variant='danger' className='btn-sm' 
+													onClick={()=> deleteHandler(location._id)}>
+												<i className='fas fa-trash'></i>
+											</Button>
+										</td>
 									</tr>
 								))
 
