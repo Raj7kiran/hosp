@@ -1,11 +1,11 @@
 import express from 'express'
 const router = express.Router()
-import { getClientList, getLocations, createLocation, deleteLocation } from '../controller/adminController.js'
+import {  getLocations, createLocation, deleteLocation } from '../controller/adminController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 
 
 router.route('/createlocation').post(protect, createLocation)
-router.route('/clientlist').get(protect, getClientList)
+// router.route('/clientlist').get(protect, getClientList)
 router.route('/locations').get(protect, getLocations)
 router.route('/locations/:id').delete(protect, deleteLocation)
 

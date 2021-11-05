@@ -40,7 +40,7 @@ const AddLocation = ({history}) => {
 	return(
 		<>
 		<h1>Add Location</h1>
-			<Link to='/admin/master' className='btn btn-dark my-3'>
+			<Link to='/admin/locations' className='btn btn-dark my-3'>
 					Go Back
 			</Link>
 				{message && <Message variant='danger'>{message}</Message>}

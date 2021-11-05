@@ -29,6 +29,14 @@ const users = [
 		password: bcrypt.hashSync('123456', 10),
 		isAdmin: false,
 		isClientAdmin: false
+	},
+	{
+		name: 'UserbyAdmin',
+		email: 'uba@abc.com',
+		password: bcrypt.hashSync('123456', 10),
+		isAdmin: false,
+		isClientAdmin: false,
+		addedUserId: '617e871c51b52bdd45deaaf2'
 	}
 ]
 

@@ -90,6 +90,7 @@ export const deleteLocation = (id) => async(dispatch, getState) => {
 		await axios.delete(`/admin/locations/${id}`, config)
 
 		dispatch({ type: LOCATION_DELETE_SUCCESS })
+		
 	} catch(error){
 			const message =
 		      error.response && error.response.data.message

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listLocations, deleteLocation } from '../actions/adminActions'
-import { LOCATION_DELETE_RESET } from '../constants/adminConstants'
+import { LOCATION_DELETE_RESET, LOCATION_CREATE_RESET } from '../constants/adminConstants'
 
 
 
@@ -16,7 +16,7 @@ const LocationScreen = ({ location, history }) => {
 	const { loading, error, locations } = locationsList
 
 	const locationCreate = useSelector(state => state.locationCreate)
-	const {  success: locationCreatesuccess } = locationCreate
+	const {  success: successCreate } = locationCreate
 
 	const locationDelete = useSelector(state => state.locationDelete)
 	const { loading: loadingDelete, success: successDelete, error:errorDelete } = locationDelete
@@ -27,16 +27,17 @@ const LocationScreen = ({ location, history }) => {
 	const redirect = location.search? location.search.split('=')[1] : '/'
 
 	useEffect(() => {
-		
+		// dispatch({ type: LOCATION_CREATE_RESET })	
+		 dispatch({ type: LOCATION_DELETE_RESET })	
 		if(!userInfo || !userInfo.isAdmin){
 			history.push('/login')
 		}
-
 		dispatch(listLocations())
-	},[dispatch])
+
+	},[dispatch, successDelete ])
 
 	const deleteHandler = (id) => {
-		if(window.confirm('Are you sureyou want to delete?')){
+		if(window.confirm('Are you sure you want to delete?')){
 			dispatch(deleteLocation(id))
 		}
 	}
@@ -55,8 +56,8 @@ const LocationScreen = ({ location, history }) => {
 			</Row>
 			{loadingDelete && <Loader />}
 			{errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-			{/*{successDelete && <Message variant='success'>Location Deleted</Message>}*/}
-			{locationCreatesuccess && <Message variant='success'>Location Added</Message>}
+			{successDelete && <Message variant='success'>Location Deleted</Message>}
+			{successCreate && <Message variant='success'>Location Added</Message>}
 			{ loading ? (<Loader />)
 			  : error ? (<Message variant='danger'>{error}</Message> )
 			  : (
@@ -70,7 +71,7 @@ const LocationScreen = ({ location, history }) => {
 						</thead>
 						<tbody>
 							{locations.map(location => (
-									<tr>
+									<tr key={location._id} >
 										<td>{location.country}</td>
 										<td>{location.state}</td>
 										<td>{location.city}</td>

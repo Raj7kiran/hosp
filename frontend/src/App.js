@@ -26,8 +26,8 @@ function App() {
                     <Route path='/' component={LoginScreen} exact />
                     <Route path='/addusers' component={AddUsersScreen} />
                     <Route path='/profile' component={ProfileScreen} />                    
-                    <Route path='/admin/addusers' component={AdminAddUsersScreen} />
-                    <Route path='/admin/clientlist' component={ClientScreen} />  
+                    {/*<Route path='/admin/addusers' component={AdminAddUsersScreen} />*/}
+                    <Route path='/clientlist' component={ClientScreen} />  
                     <Route path='/admin/locations' component={LocationScreen} />
                     <Route path='/admin/addlocation' component={AddLocationScreen} />
                     <Route path='/updateprofile' component={UpdateProfileScreen} />  

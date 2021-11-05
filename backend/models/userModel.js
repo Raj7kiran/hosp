@@ -18,13 +18,17 @@ const userSchema = mongoose.Schema({
 	},
 	isAdmin: {
 		type: Boolean,
-		required: true,
+		
 		default: false
 	},
 	isClientAdmin: {
 		type: Boolean,
-		required: true,
+		
 		default: false
+	},
+	addedUserId: {
+		type: String,
+		// required: true
 	}
 },
 	{

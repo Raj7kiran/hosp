@@ -1,10 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Table, Row, Col } from 'react-bootstrap'
-import users from '../users'
+import { useDispatch, useSelector } from 'react-redux'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+import { listClients } from '../actions/clientActions'
+
+
+
 
 
 const ClientScreen = () => {
+	
+	const clientList = useSelector(state => state.clientList)
+	const { loading, success, users } = clientList
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(listClients())
+	}, [dispatch])
+
 	return (
 
 		<>
@@ -14,7 +30,7 @@ const ClientScreen = () => {
 				</Col>
 
 				<Col className='text-right my-3'>
-					<Link className='btn btn-dark' to='/admin/addusers'>Add User</Link>
+					<Link className='btn btn-dark' to='/addusers'>Add User</Link>
 				</Col>
 			</Row>
 			<Table striped bordered hover responsive className='table-sm'>

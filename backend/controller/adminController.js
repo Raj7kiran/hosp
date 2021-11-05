@@ -4,14 +4,15 @@ import Location from '../models/locationModel.js'
 
 
 
-const getClientList = asyncHandler(async(req,res) => {
-	console.log(`req.use :  ${req.user}`)
-	const clients = await User.find({ user: req.user._id })
-	res.json(clients)
-})
+// const getClientList = asyncHandler(async(req,res) => {
+// 	console.log(`req.use :  ${req.user}`)
+// 	const clients = await User.find({ addedUserId: req.user._id })
+// 	res.json(clients)
+// })
 
 
 const getLocations = asyncHandler(async(req,res) => {
+		//res.send(req.headers)
 	const locations = await Location.find({ user: req.user._id  })
 	res.json(locations)
 })
@@ -47,4 +48,4 @@ const deleteLocation = asyncHandler(async(req,res)=> {
 })
 
 
-export { getClientList, getLocations, createLocation, deleteLocation }
+export { getLocations, createLocation, deleteLocation }

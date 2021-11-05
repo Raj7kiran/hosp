@@ -31,12 +31,15 @@ const Header = () => {
                       <LinkContainer to='/profile'>
                           <NavDropdown.Item>Profile</NavDropdown.Item>
                       </LinkContainer>
-                       <LinkContainer to='/addusers'>
+                     {/*  <LinkContainer to='/addusers'>
                             <NavDropdown.Item>Add Users</NavDropdown.Item>
-                      </LinkContainer>                     
-                      <LinkContainer to='/userlist'>
+                      </LinkContainer> */}
+                      <LinkContainer to='/clientlist'>
+                              <NavDropdown.Item>Clients</NavDropdown.Item>
+                          </LinkContainer>                    
+                          {/*<LinkContainer to='/userlist'>
                               <NavDropdown.Item>User List</NavDropdown.Item>
-                          </LinkContainer>
+                          </LinkContainer>*/}
                           <NavDropdown.Item onClick={logoutHandler} >
                             Logout
                           </NavDropdown.Item>                      
@@ -46,7 +49,7 @@ const Header = () => {
                           <LinkContainer to='/profile'>
                               <NavDropdown.Item>Profile</NavDropdown.Item>
                           </LinkContainer>
-                          <LinkContainer to='/admin/clientlist'>
+                          <LinkContainer to='/clientlist'>
                               <NavDropdown.Item>Clients</NavDropdown.Item>
                           </LinkContainer>
                           <LinkContainer to='/admin/locations'>

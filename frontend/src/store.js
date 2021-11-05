@@ -3,6 +3,8 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { userLoginReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/userReducers'
 import { locationListReducer, locationCreateReducer, locationDeleteReducer } from './reducers/adminReducers'
+import { clientListReducer, clientCreateReducer } from './reducers/clientReducers'
+
 
 const reducer = combineReducers({
 	userLogin: userLoginReducer,
@@ -10,7 +12,10 @@ const reducer = combineReducers({
 	locationsList: locationListReducer,
 	locationCreate: locationCreateReducer,
 	userUpdateProfile: userUpdateProfileReducer,
-	locationDelete: locationDeleteReducer
+	locationDelete: locationDeleteReducer,
+	clientList:clientListReducer,
+	clientCreate:clientCreateReducer
+
 })
 
 

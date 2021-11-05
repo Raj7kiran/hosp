@@ -7,6 +7,7 @@ import Location from './models/locationModel.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import userRoutes from './routes/userRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
+import clientRoutes from './routes/clientRoutes.js'
 
 
 const app = express();
@@ -24,6 +25,7 @@ connectDB()
 
 app.use('/users', userRoutes)
 app.use('/admin', adminRoutes)
+app.use('/client', clientRoutes)
 
 
 const __dirname = path.resolve()
