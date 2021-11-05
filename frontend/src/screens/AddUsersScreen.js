@@ -102,18 +102,7 @@ const AddUsersScreen = ({history}) => {
 							{/*{ userInfo.isAdmin && (
 
 								) }*/}
-							{ userInfo.isClientAdmin && (
-									<Form.Group controlId='isClientAdmin'>
-										<Form.Label>Is the user a Client Admin?</Form.Label>
-										<InputGroup className="mb-3">
-											    <InputGroup.Checkbox 	aria-label="Checkbox for following text input"
-											    						checked={isClientAdmin}
-											    						onChange = { (e) => setIsClientAdmin(e.target.checked) }
-											     />
-											 <FormControl aria-label="Text input with checkbox" />
-										</InputGroup>
-									</Form.Group>
-								) }
+							
 											
 
 
