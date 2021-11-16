@@ -8,13 +8,15 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import userRoutes from './routes/userRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import clientRoutes from './routes/clientRoutes.js'
+import dropRoutes from './routes/dropRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js'
 
 
 const app = express();
 
-if(process.env.NODE_ENV === 'development'){
-	app.use(morgan('dev'))
-}
+// if(process.env.NODE_ENV === 'development'){
+// 	app.use(morgan('dev'))
+// }
 
 app.use(express.json())
 
@@ -26,6 +28,9 @@ connectDB()
 app.use('/users', userRoutes)
 app.use('/admin', adminRoutes)
 app.use('/client', clientRoutes)
+app.use('/drop', dropRoutes)
+app.use('/upload', uploadRoutes)
+
 
 
 const __dirname = path.resolve()

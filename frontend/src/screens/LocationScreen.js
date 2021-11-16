@@ -24,7 +24,7 @@ const LocationScreen = ({ location, history }) => {
 	const userLogin = useSelector(state => state.userLogin)
 	const {userInfo} = userLogin
 	
-	const redirect = location.search? location.search.split('=')[1] : '/'
+	// const redirect = location.search? location.search.split('=')[1] : '/'
 
 	useEffect(() => {
 		// dispatch({ type: LOCATION_CREATE_RESET })	
@@ -34,7 +34,7 @@ const LocationScreen = ({ location, history }) => {
 		}
 		dispatch(listLocations())
 
-	},[dispatch, successDelete ])
+	},[dispatch, successDelete, history ])
 
 	const deleteHandler = (id) => {
 		if(window.confirm('Are you sure you want to delete?')){

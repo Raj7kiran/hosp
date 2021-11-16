@@ -3,8 +3,14 @@ import dotenv from 'dotenv'
 						   
 import users from './data/users.js'
 import locations from './data/location.js'
+import countries from './data/countries.js'
+import states from './data/states.js'
+import cities from './data/cities.js'
 import User from './models/userModel.js'
 import Location from './models/locationModel.js'
+import Country from './models/countryModel.js'
+import State from './models/stateModel.js'
+import City from './models/cityModel.js'
 										  
 import connectDB from './config/db.js'
 
@@ -21,6 +27,9 @@ const importData =  async () => {
 							
 		await User.deleteMany()
 		await Location.deleteMany()
+		await Country.deleteMany()
+		await State.deleteMany()
+		await City.deleteMany()
 
 		const createdUsers = await User.insertMany(users)
 		const adminUser = createdUsers[0]._id
@@ -29,6 +38,13 @@ const importData =  async () => {
 		})
 
 		await Location.insertMany(sampleLocations)
+
+		await Country.insertMany(countries)
+
+		await State.insertMany(states)
+
+		await City.insertMany(cities)
+
 
 		console.log('Data Imported')
 		process.exit()
@@ -45,6 +61,9 @@ const destroyData = async() => {
 							
 		await User.deleteMany()
 		await Location.deleteMany()
+		await Country.deleteMany()
+		await State.deleteMany()
+		await City.deleteMany()
 
 		console.log('Data deleted')
 		process.exit() 

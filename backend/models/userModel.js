@@ -16,6 +16,36 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	image:{
+		type: String,
+	},
+	date:{
+		type: String,
+	},
+	designation:{
+		type: String,
+	},
+	gender:{
+		type: String,
+	},
+	country: {
+		type: String
+	},
+	state: {
+		type: String
+	},
+	city: {
+		type: String
+	},
+	address: {
+		type: String
+	},
+	pincode: {
+		type: String
+	},
+	phone: {
+		type: String
+	},
 	isAdmin: {
 		type: Boolean,
 		

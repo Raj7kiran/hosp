@@ -6,7 +6,6 @@ import Footer from './components/Footer';
 import LocationScreen from './screens/LocationScreen'
 import LoginScreen from './screens/LoginScreen'
 import AddUsersScreen from './screens/AddUsersScreen'
-import AdminAddUsersScreen from './screens/AdminAddUsersScreen'
 import ClientScreen from './screens/ClientScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import UpdateProfileScreen from './screens/UpdateProfileScreen'

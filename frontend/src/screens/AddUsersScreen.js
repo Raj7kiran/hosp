@@ -36,7 +36,7 @@ const AddUsersScreen = ({history}) => {
 			history.push('/clientlist')
 		} 
 			 
-	},[success, history])
+	},[success, history, dispatch])
 
 	const submitHandler = (e) => {
 		e.preventDefault()
@@ -87,7 +87,12 @@ const AddUsersScreen = ({history}) => {
 										</InputGroup>
 									</Form.Group>
 
-									<Form.Group controlId='isClientAdmin'>
+									</>
+								) }
+							{/*{ userInfo.isAdmin && (
+
+								) }*/}
+								<Form.Group controlId='isClientAdmin'>
 										<Form.Label>Is the user a Client Admin?</Form.Label>
 										<InputGroup className="mb-3">
 											    <InputGroup.Checkbox 	aria-label="Checkbox for following text input"
@@ -97,12 +102,6 @@ const AddUsersScreen = ({history}) => {
 											 <FormControl aria-label="Text input with checkbox" />
 										</InputGroup>
 									</Form.Group>
-									</>
-								) }
-							{/*{ userInfo.isAdmin && (
-
-								) }*/}
-							
 											
 
 
