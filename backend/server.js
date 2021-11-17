@@ -9,7 +9,7 @@ import userRoutes from './routes/userRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import clientRoutes from './routes/clientRoutes.js'
 import dropRoutes from './routes/dropRoutes.js'
-import uploadRoutes from './routes/uploadRoutes.js'
+import uploadRoutes from './routes/uploadroutes.js'
 
 
 const app = express();
