@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { userLoginReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/userReducers'
 import { locationListReducer, locationCreateReducer, locationDeleteReducer } from './reducers/adminReducers'
-import { clientListReducer, clientCreateReducer } from './reducers/clientReducers'
+import { clientListReducer, clientCreateReducer, manufacturerListReducer, manufacturerCreateReducer } from './reducers/clientReducers'
 import { countryListReducer, stateListReducer, cityListReducer } from './reducers/dropReducers'
 
 
@@ -18,7 +18,9 @@ const reducer = combineReducers({
 	clientCreate:clientCreateReducer,
 	countryList: countryListReducer,
 	stateList: stateListReducer,
-	cityList: cityListReducer
+	cityList: cityListReducer,
+	manufacturerList: manufacturerListReducer,
+	manufacturerCreate: manufacturerCreateReducer
 
 })
 

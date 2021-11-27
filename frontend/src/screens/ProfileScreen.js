@@ -93,7 +93,9 @@ const ProfileScreen = ({ location, history }) => {
 				setPhone(user.phone)
 				setDob(user.date)
 
-				
+				console.log(`user.city: ${user.city}`)
+				console.log(`city: ${city}`)
+
 				dispatch(getAState(user.country))
 				dispatch(getCity(user.state))
 				
@@ -158,14 +160,15 @@ const ProfileScreen = ({ location, history }) => {
 		setDob(data)
 	}
 
-	const forcity = (c) => {
-		console.log(`c.name: ${c.name}`)
-		// c.name===undefined ? console.log(`c: ${c}`) : console.log(`c.name : ${c.name}`)
-		c.name===undefined ? setCity(c) : setCity(c.name)
+	// const forcity = (c) => {
+	// 	console.log(`val.name: ${c.name}`)
+	// 	// console.log(`c.name: ${c.name}`)
+	// 	c.name===undefined ? console.log(`c: ${c}`) : console.log(`c.name : ${c.name}`)
+	// 	c.name===undefined ? setCity(c) : setCity(c.name)
 
 
-		console.log(`City: ${city}`)
-	}
+	// 	console.log(`city: ${city}`)
+	// }
 	
 
 	return (
@@ -283,11 +286,11 @@ const ProfileScreen = ({ location, history }) => {
 							</Form.Group>
 
 							
-							<div className='my-3' style={{width: 200}}>
+							<div className='my-3' style={{width: 300}}>
 								<Form.Label>City : {city}</Form.Label>
 								<Dropdown 	options={cities} prompt='Select City'
 											id= '_id' label='name'
-											value={city} onChange={val => forcity(val)}
+											value={city} onChange={val => setCity(val)}
 								 />
 							</div>
 

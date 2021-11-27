@@ -6,11 +6,14 @@ import locations from './data/location.js'
 import countries from './data/countries.js'
 import states from './data/states.js'
 import cities from './data/cities.js'
+import manufacturer from './data/manufacturer.js'
+
 import User from './models/userModel.js'
 import Location from './models/locationModel.js'
 import Country from './models/countryModel.js'
 import State from './models/stateModel.js'
 import City from './models/cityModel.js'
+import Manufacturer from './models/manufacturerModel.js'
 										  
 import connectDB from './config/db.js'
 
@@ -25,26 +28,28 @@ connectDB()
 const importData =  async () => {
 	try{		  
 							
-		await User.deleteMany()
-		await Location.deleteMany()
-		await Country.deleteMany()
-		await State.deleteMany()
-		await City.deleteMany()
+		// await User.deleteMany()
+		// await Location.deleteMany()
+		// await Country.deleteMany()
+		// await State.deleteMany()
+		// await City.deleteMany()
+		await Manufacturer.deleteMany()
 
-		const createdUsers = await User.insertMany(users)
-		const adminUser = createdUsers[0]._id
-		const sampleLocations = locations.map(location => {
-			return { ...location, user:adminUser }
-		})
+		// const createdUsers = await User.insertMany(users)
+		// const adminUser = createdUsers[0]._id
+		// const sampleLocations = locations.map(location => {
+		// 	return { ...location, user:adminUser }
+		// })
 
-		await Location.insertMany(sampleLocations)
+		// await Location.insertMany(sampleLocations)
 
-		await Country.insertMany(countries)
+		// await Country.insertMany(countries)
 
-		await State.insertMany(states)
+		// await State.insertMany(states)
 
-		await City.insertMany(cities)
+		// await City.insertMany(cities)
 
+		await Manufacturer.insertMany(manufacturer)
 
 		console.log('Data Imported')
 		process.exit()

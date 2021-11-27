@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import User from '../models/userModel.js'
-//import Location from '../models/locationModel.js'
+import Manufacturer from '../models/manufacturerModel.js'
+
 
 
 //get the users list
@@ -29,5 +30,26 @@ const createClient = asyncHandler(async(req,res) => {
 
 })
 
+//get manufacturer
+const getManufacturer = asyncHandler(async(req,res) => {
+	const manufacturer = await Manufacturer.find({})
+	res.json(manufacturer)
+})
 
-export { getClientList, createClient }
+
+//add Manufacturer
+const addManufacturer = asyncHandler(async(req,res) => {
+	const { name, shortName, country } = req.body
+
+	const manufacturer = new Manufacturer({
+		name,
+		shortName,
+		country,
+		user:req.user._id
+	})
+
+	const createdManufacturer = await manufacturer.save()
+	res.status(200).json(createdManufacturer)
+})
+
+export { getClientList, createClient, getManufacturer, addManufacturer }

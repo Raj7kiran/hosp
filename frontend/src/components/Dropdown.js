@@ -16,7 +16,7 @@ const Dropdown = ({ options, prompt, value, onChange, id , label  }) => {
 		// if(!value || query){
 		// 	value = query
 		// }
-	})
+	},[])
 
 	function close(e) {
 		// console.dir([e.target, ref.current])
@@ -45,6 +45,7 @@ const Dropdown = ({ options, prompt, value, onChange, id , label  }) => {
 							value = {displayValue()}
 							onChange= { e=> { 
 												setQuery(e.target.value)
+												 // onChange(null)
 												onChange(e.target.value)
 											}}
 							onClick={() => setOpen(prev => !prev)} />
@@ -56,11 +57,13 @@ const Dropdown = ({ options, prompt, value, onChange, id , label  }) => {
 					<div key={option[id]} 
 						 className={`option ${ value === option ? 'selected': null }`}//this ternary option is for showing which option was selected
 						 onClick = {() => {
-						 setQuery('')//so this wil show the value selected instead of the query
-						 onChange(option)
-						 setOpen(false)
-					 }  }
-				 		>{option? option[label] : query}
+								 setQuery('')//so this wil show the value selected instead of the query
+								 onChange(option)
+								 setOpen(false)
+							 }  }
+				 		>
+				 		{/*{option? option[label] : query} //what we added*/}
+				 		{option[label]}
 					</div>)}
 			</div>
 		</div>
