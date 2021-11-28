@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import { Table, Row, Col, Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
@@ -31,6 +32,7 @@ const ManufacturerScreen = ({ history }) => {
 	const { loading: createLoading, error: createError, success:createSuccess, manufacturer } = manufacturerCreate
 
 	useEffect(() => {
+		
 		dispatch({type: MANUFACTURER_CREATE_RESET})
 
 		if(!userInfo){
@@ -44,9 +46,12 @@ const ManufacturerScreen = ({ history }) => {
 
 	function search(manufacturers) {
 		return manufacturers.filter((manufacturer) => 
+
 										manufacturer.name.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
 										manufacturer.shortName.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
-										manufacturer.country.toLowerCase().indexOf(q.toLowerCase()) > -1 
+										manufacturer.createdUser.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
+										manufacturer.country.toLowerCase().indexOf(q.toLowerCase()) > -1
+										 										
 									)
 	}
 
@@ -108,7 +113,16 @@ const ManufacturerScreen = ({ history }) => {
 		</Form>
 		
 			
-		
+		<h2 className='mt-4'>Manufacturer List</h2>
+		<ReactHTMLTableToExcel
+                    id="test-table-xls-button"
+                    className="download-table-xls-button btn btn-success mb-3"
+                    table="table-to-xls"
+                    filename="tablexls"
+                    sheet="tablexls"
+                    buttonText="Export"
+              />
+
 		{ loading ? <Loader />
 			: error ? <Message variant='danger'>{error}</Message>
 			: (		
@@ -116,12 +130,14 @@ const ManufacturerScreen = ({ history }) => {
 					<input type="search" placeholder="Search" className="me-2 my-2" aria-label="Search" 
 						   value={q} onChange={(e) =>  setQ(e.target.value)}
 					/>
-					<Table striped bordered hover responsive='md' className='table-sm'>
+					<Table striped bordered hover responsive='md' className='table-sm' id="table-to-xls">
 						<thead>
 							<tr>
 								<th>Manufacturer Name</th>
 								<th>Short Name</th>
 								<th>Country</th>
+								<th>CreatedBy</th>
+								<th>Created Date</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -130,6 +146,8 @@ const ManufacturerScreen = ({ history }) => {
 										<td>{manufacturer.name}</td>
 										<td>{manufacturer.shortName}</td>
 										<td>{manufacturer.country}</td>
+										<td>{manufacturer.createdUser}</td>
+										<td>{manufacturer.createdAt.substring(0,10)}</td>
 									</tr>
 								)) }
 						</tbody>
