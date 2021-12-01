@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import FormContainer from '../components/FormContainer'
+// import FormContainer from '../components/FormContainer'
 import { getCountry} from '../actions/dropActions'
-import {listManufacturers, createManufacturer} from '../actions/clientActions'
+import {listManufacturers, createManufacturer, deleteManfacturer} from '../actions/clientActions'
 import { MANUFACTURER_CREATE_RESET } from '../constants/clientConstants'
 
 
@@ -31,6 +31,9 @@ const ManufacturerScreen = ({ history }) => {
 	const manufacturerCreate = useSelector( state => state.manufacturerCreate )
 	const { loading: createLoading, error: createError, success:createSuccess, manufacturer } = manufacturerCreate
 
+	const manufacturerDelete = useSelector(state => state.manufacturerDelete)
+	const { loading: loadingDelete, success: successDelete, error:errorDelete } = manufacturerDelete
+
 	useEffect(() => {
 		
 		dispatch({type: MANUFACTURER_CREATE_RESET})
@@ -42,7 +45,7 @@ const ManufacturerScreen = ({ history }) => {
 		dispatch(listManufacturers())
 		dispatch(getCountry())
 
-	},[dispatch,history,createSuccess])
+	},[dispatch,history,createSuccess,successDelete])
 
 	function search(manufacturers) {
 		return manufacturers.filter((manufacturer) => 
@@ -67,6 +70,12 @@ const ManufacturerScreen = ({ history }) => {
 
 		}
 
+	const deleteHandler = (id) => {
+		if(window.confirm('Are you sure you want to delete?')){
+			dispatch(deleteManfacturer(id))
+		}
+	}
+
 	
 	return(
 		<>
@@ -74,6 +83,9 @@ const ManufacturerScreen = ({ history }) => {
 		<Link to='/' className='btn btn-dark my-3'>Go Back</Link>
 		{createLoading && <Loader />}
 		{createError && <Message variant='danger'>{createError}</Message>}
+		{loadingDelete && <Loader />}
+		{errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+
 		<Form onSubmit={submitHandler}>
 		<Row className='my-3' >
 			
@@ -138,6 +150,7 @@ const ManufacturerScreen = ({ history }) => {
 								<th>Country</th>
 								<th>CreatedBy</th>
 								<th>Created Date</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -148,6 +161,17 @@ const ManufacturerScreen = ({ history }) => {
 										<td>{manufacturer.country}</td>
 										<td>{manufacturer.createdUser}</td>
 										<td>{manufacturer.createdAt.substring(0,10)}</td>
+										<td>
+											{/*<LinkContainer to={`/admin/product/${product._id}/edit`}>
+												<Button variant='light' className='btn-sm'>
+													<i className='fas fa-edit'></i>
+												</Button>
+											</LinkContainer>*/}
+											<Button variant='danger' className='btn-sm' 
+													onClick={()=> deleteHandler(manufacturer._id)}>
+												<i className='fas fa-trash'></i>
+											</Button>
+										</td>
 									</tr>
 								)) }
 						</tbody>

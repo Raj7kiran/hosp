@@ -11,6 +11,7 @@ import ProfileScreen from './screens/ProfileScreen'
 import UpdateProfileScreen from './screens/UpdateProfileScreen'
 import AddLocationScreen from './screens/AddLocationScreen'
 import ManufacturerScreen from './screens/ManufacturerScreen'
+import SupplierScreen from './screens/SupplierScreen'
 
 
 
@@ -31,6 +32,7 @@ function App() {
                     <Route path='/admin/locations' component={LocationScreen} />
                     <Route path='/admin/addlocation' component={AddLocationScreen} />
                     <Route path='/client/manufacturer' component={ManufacturerScreen} />
+                    <Route path='/client/supplier' component={SupplierScreen} />
                     <Route path='/updateprofile' component={UpdateProfileScreen} />  
 
 

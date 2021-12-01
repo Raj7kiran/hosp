@@ -19,4 +19,12 @@ code {
   margin: 40px;
 }
 
+.address {
+  display: flex;
+  flex-wrap: nowrap;
+}
 
+
+#table-to-xls {
+  font-size: 12px;
+}
